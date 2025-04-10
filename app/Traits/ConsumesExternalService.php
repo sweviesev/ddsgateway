@@ -9,6 +9,10 @@ trait ConsumesExternalService
 {
     $client = new Client(['base_uri' => $this->baseUri]);
 
+    if(isset($this->secret)) {
+        $headers['Authorization'] = $this->secret;
+    }
+
     $options = ['headers' => $headers];
 
     if (in_array($method, ['POST', 'PUT', 'PATCH'])) {
